@@ -95,7 +95,7 @@ class phMagick_resize{
         //naming the new thumbnail
         $thumbnailFile = $basePath . '/'.$width . '_' . $height . '_' . basename($imageUrl) ;
 
-        $P->setSource($sourceFile);
+        $p->setSource($sourceFile);
         $p->setDestination($thumbnailFile);
 
         if (! file_exists($thumbnailFile)){
