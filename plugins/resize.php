@@ -99,7 +99,7 @@ class phMagick_resize{
         $p->setDestination($thumbnailFile);
 
         if (! file_exists($thumbnailFile)){
-            $p->resize($p,$width, $height, $exactDimentions);
+            $this->resize($p,$width, $height, $exactDimentions);
         }
 
         if (! file_exists($thumbnailFile)){
