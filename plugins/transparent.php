@@ -27,33 +27,35 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2013-09-18
  */
-class phMagick_transparent {
+if (! class_exists('phMagick_transparent')) {
+  class phMagick_transparent {
 
-    /**
-     * Makes the specified colour transparent in the image.
-     * Ensure the output format is appropriate for transparency.
-     *
-     * @param phmagick $p
-     * @param int $fuzz A percentage representing the tolerance of matching colours that aren't exactly the same
-     * @param string $colour The colour to make transparent
-     * @return \phmagick
-     */
-    function transparentPaintImage(phmagick $p, $fuzz = null, $colour = 'white')
-    {
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' ' . $p->getSource() ;
+      /**
+       * Makes the specified colour transparent in the image.
+       * Ensure the output format is appropriate for transparency.
+       *
+       * @param phmagick $p
+       * @param int $fuzz A percentage representing the tolerance of matching colours that aren't exactly the same
+       * @param string $colour The colour to make transparent
+       * @return \phmagick
+       */
+      function transparentPaintImage(phmagick $p, $fuzz = null, $colour = 'white')
+      {
+          $cmd  = $p->getBinary('convert');
+          $cmd .= ' ' . $p->getSource() ;
 
-        if ($fuzz != null)
-            $cmd .= ' -fuzz ' . (int)$fuzz . '%';
+          if ($fuzz != null)
+              $cmd .= ' -fuzz ' . (int)$fuzz . '%';
 
-        $cmd .= ' -transparent ' . $colour;
+          $cmd .= ' -transparent ' . $colour;
 
-        $cmd .= ' ' . $p->getDestination() ;
+          $cmd .= ' ' . $p->getDestination() ;
 
-        $p->execute($cmd);
-        $p->setSource($p->getDestination());
-        $p->setHistory($p->getDestination());
+          $p->execute($cmd);
+          $p->setSource($p->getDestination());
+          $p->setHistory($p->getDestination());
 
-        return $p;
-    }
+          return $p;
+      }
+  }
 }

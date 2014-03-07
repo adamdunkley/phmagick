@@ -27,35 +27,37 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2013-09-18
  */
-class phMagick_trim {
+if (! class_exists('phMagick_trim')) {
+  class phMagick_trim {
 
-    /**
-     * Automatically crops the image by removing any borders or edges of an image which does not change
-     * in colour or transparency.
-     *
-     * This method discards the canvas information (via +repage) and saves the cropped image.
-     *
-     * @param phmagick $p
-     * @param int $fuzz A percentage representing the tolerance of matching colours that aren't exactly the same
-     * @return \phmagick
-     */
-    function trim (phmagick $p, $fuzz = null){
+      /**
+       * Automatically crops the image by removing any borders or edges of an image which does not change
+       * in colour or transparency.
+       *
+       * This method discards the canvas information (via +repage) and saves the cropped image.
+       *
+       * @param phmagick $p
+       * @param int $fuzz A percentage representing the tolerance of matching colours that aren't exactly the same
+       * @return \phmagick
+       */
+      function trim (phmagick $p, $fuzz = null){
 
-        $cmd  = $p->getBinary('convert');
-        $cmd .= ' ' . $p->getSource() ;
+          $cmd  = $p->getBinary('convert');
+          $cmd .= ' ' . $p->getSource() ;
 
-        if ($fuzz != null)
-            $cmd .= ' -fuzz ' . (int)$fuzz . '%';
+          if ($fuzz != null)
+              $cmd .= ' -fuzz ' . (int)$fuzz . '%';
 
-        $cmd .= ' -trim +repage';
+          $cmd .= ' -trim +repage';
 
-        $cmd .= ' ' . $p->getDestination() ;
+          $cmd .= ' ' . $p->getDestination() ;
 
-        $p->execute($cmd);
-        $p->setSource($p->getDestination());
-        $p->setHistory($p->getDestination());
+          $p->execute($cmd);
+          $p->setSource($p->getDestination());
+          $p->setHistory($p->getDestination());
 
-        return $p;
-    }
+          return $p;
+      }
 
+  }
 }

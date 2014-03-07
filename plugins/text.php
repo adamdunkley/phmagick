@@ -27,45 +27,47 @@
  * @link       http://www.francodacosta.com/phmagick
  * @since      2008-03-13
  */
-class phMagick_text{
-/**
-     * Draws an image with the submited string, usefull for water marks
-     *
-     * @param $text String - the text to draw an image from
-     * @param $format phMagickTextObject - the text configuration
-     */
-    function fromString(phmagick $p, $text = '', phMagickTextObject $format = null){
+if (! class_exists('phMagick_text')) {
+  class phMagick_text{
+  /**
+       * Draws an image with the submited string, usefull for water marks
+       *
+       * @param $text String - the text to draw an image from
+       * @param $format phMagickTextObject - the text configuration
+       */
+      function fromString(phmagick $p, $text = '', phMagickTextObject $format = null){
 
-        if(is_null($format)) $format = new phMagickTextObject();
+          if(is_null($format)) $format = new phMagickTextObject();
 
-        $cmd  = $p->getBinary('convert');
+          $cmd  = $p->getBinary('convert');
 
-        if ($format->background !== false)
-            $cmd .= ' -background "' . $format->background . '"';
+          if ($format->background !== false)
+              $cmd .= ' -background "' . $format->background . '"';
 
-        if ($format->color !== false)
-            $cmd .= ' -fill "' . $format->color . '"' ;
+          if ($format->color !== false)
+              $cmd .= ' -fill "' . $format->color . '"' ;
 
-        if ($format->font !== false)
-            $cmd .= ' -font ' . $format->font ;
+          if ($format->font !== false)
+              $cmd .= ' -font ' . $format->font ;
 
-        if ($format->fontSize !== false)
-            $cmd .= ' -pointsize ' . $format->fontSize ;
+          if ($format->fontSize !== false)
+              $cmd .= ' -pointsize ' . $format->fontSize ;
 
-        if ($format->width || $format->height)
-            $cmd .= ' -size ' . $format->width . 'x' . $format->height;
+          if ($format->width || $format->height)
+              $cmd .= ' -size ' . $format->width . 'x' . $format->height;
 
-        if (($format->pText != '') && ($text = '') )
-            $text = $format->pText ;
+          if (($format->pText != '') && ($text = '') )
+              $text = $format->pText ;
 
-        $cmd .= ' label:"'. $text .'"';
-        $cmd .= ' "' . $p->getDestination().'"' ;
+          $cmd .= ' label:"'. $text .'"';
+          $cmd .= ' "' . $p->getDestination().'"' ;
 
-        $p->execute($cmd);
-        $p->setSource($p->getDestination());
-        $p->setHistory($p->getDestination());
-        return  $p ;
-    }
+          $p->execute($cmd);
+          $p->setSource($p->getDestination());
+          $p->setHistory($p->getDestination());
+          return  $p ;
+      }
+  }
 }
 
 
